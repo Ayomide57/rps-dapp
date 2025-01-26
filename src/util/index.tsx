@@ -90,7 +90,7 @@ export const solve = async (
   const salt = getData("secretSalt");
   try {
       const contract = new Contract(contract_address, rpsAbi, signer);
-      const response = await contract.solve(move, salt);
+    const response = await contract.solve(move, salt);
     await response;
       const gameRecord = getData("gameRecord");
         const checkWinner1 = await contract.win(move, gameRecord.m2);
@@ -159,7 +159,6 @@ try {
   const contract = new Contract(hasherAddress, hasherAbi, signer);
   const response = await contract.hash(move, BigInt(`${randomNum}`));
   const hasherTx = await response;
-  console.log("hashTx", hasherTx);
   const contractFactory = new ContractFactory(
     rpsAbi,
     rpsContractByteCode,
@@ -207,8 +206,7 @@ export const j1Timeout = async (
   try {
     const contract = new Contract(contract_address, rpsAbi, signer);
     const response = await contract.j1Timeout();
-    const rpsTx = await response;
-    console.log("rpsTx =====", rpsTx);
+    await response;
     dispatch({
       type: "UPDATE_GAME_WINNER",
       payload: {
@@ -264,8 +262,7 @@ export const winner = async (
   try {
     const contract = new Contract(contract_address, rpsAbi, signer);
     const response = await contract.win(2, gameRecord.m2);
-    const rpsTx = await response;
-    console.log("rpsTx ======", rpsTx);
+    await response;
     //toast.success("Player 1: Your account has been refunded");
   } catch (error) {
     toast.error(error);

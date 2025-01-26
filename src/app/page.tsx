@@ -15,14 +15,12 @@ import Player2 from "@/components/Player2";
 export default function Home() {
   const [game, dispatch] = useReducer(reducer, initialState);
   const [data, updateData] = useState<any>();
-  //const [loading, setLoading] = useState<boolean>();
 
     const [move, setMove] = useState<number>(0);
   const smartAccount = useActiveAccount();
 
   const getGameInfo = useCallback(() => {
     if (smartAccount?.address) {
-      //setLoading(false);
       dispatch({
         type: "GET_GAME_BY_USER_ADDRESS",
         payload: { player: smartAccount?.address },
@@ -34,7 +32,6 @@ export default function Home() {
     if (smartAccount?.address && initialState === game) {
       getGameInfo();
       updateData(getData("gameRecord"));
-      //setLoading(true);
     }
     console.log("data",data);
   }, [move, data, game, smartAccount?.address, getGameInfo]);

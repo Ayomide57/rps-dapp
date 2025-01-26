@@ -41,7 +41,7 @@ const Player1 = ({ move, data, dispatch }: IPlayer) => {
             {data.m2 != 0 && data.winner === null && (
               <div>
                 <p className="text-lg p-5 text-center">
-                  Please select your previous move, To verify
+                  Please select your previous move, To Pick Winner
                 </p>
                 <Button
                   size="4"
@@ -51,7 +51,11 @@ const Player1 = ({ move, data, dispatch }: IPlayer) => {
                     solve(data.player1, move, data.contract_address, dispatch);
                     setTimeout(() => {
                       window.location.reload();
+                    }, 50000);
+                    setTimeout(() => {
+                    window.location.reload();
                     }, 20000);
+
                   }}
                 >
                   End Game, Pick Winner
@@ -92,6 +96,10 @@ const Player1 = ({ move, data, dispatch }: IPlayer) => {
                                     setTimeout(() => {
                                         window.location.reload();
                                     }, 20000);
+                                                        setTimeout(() => {
+                                                          window.location.reload();
+                                                        }, 20000);
+
                                 }}
                             >
                                 Start a New Game

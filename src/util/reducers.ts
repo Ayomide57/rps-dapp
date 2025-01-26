@@ -50,11 +50,14 @@ export async function  reducer(state: any, action: ActionType ) {
       }
     case 'GET_GAME_BY_USER_ADDRESS': {
         const payload = await database.getGameInformationByUserAddress(action.payload.player);
-      if (payload && payload.length > 0 && payload[0].game_end === false ) {
+      if (payload && payload.length > 0) {
+        if (payload[0].game_end === false) {
           setData("gameRecord", payload[0] )
+        } else {
+          setData("gameRecord", null )
+        }
           return { ...payload[0] };
       } else {
-          setData("gameRecord", null )
           return { ...initialState };
         }
       }

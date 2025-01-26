@@ -89,33 +89,36 @@ export const solve = async (
 
   const salt = getData("secretSalt");
   try {
-      const contract = new Contract(contract_address, rpsAbi, signer);
+    const contract = new Contract(contract_address, rpsAbi, signer);
     const response = await contract.solve(move, salt);
     await response;
+      setTimeout(async () => {
       const gameRecord = getData("gameRecord");
-        const checkWinner1 = await contract.win(move, gameRecord.m2);
-        const winnerTx = await checkWinner1;
-            const checkWinner2 = await contract.win(gameRecord.m2, move);
-            const winnerTx2 = await checkWinner2;
-    if (winnerTx2 === winnerTx) {
-      winner = "Tie";
-    } else {
-      winner = winnerTx && player1;
-      winner = winnerTx2 && gameRecord.player2;
-    }
-          dispatch({
-            type: "UPDATE_GAME_WINNER",
-            payload: {
-              player: winner,
-              contract_address: contract_address,
-            },
-          });
+      const checkWinner1 = await contract.win(move, gameRecord.m2);
+      const winnerTx = await checkWinner1;
+      const checkWinner2 = await contract.win(gameRecord.m2, move);
+      const winnerTx2 = await checkWinner2;
+      if (winnerTx2 === winnerTx) {
+        winner = "Tie";
+      } else {
+        winner = winnerTx ? player1 : "";
+        winner = winnerTx2 ? gameRecord.player2 : winner;
+      }
+      dispatch({
+        type: "UPDATE_GAME_WINNER",
+        payload: {
+          player: winner,
+          contract_address: contract_address,
+        },
+      });
 
-    if (winner === "Tie") { 
-      toast.success("It's a Tie, Check your balance for refund") 
-    } else {
-      toast.success(`Winner: ${winner}`);
-    }
+      if (winner === "Tie") {
+        toast.success("It's a Tie, Check your balance for refund");
+      } else {
+        toast.success(`Winner: ${winner}`);
+      }
+      }, 10000);
+
   } catch (error) {
     console.log(error);
     toast.error("Transaction Failed");
@@ -183,6 +186,10 @@ try {
   toast.success(
     "The game has begun, and your move has been successfully recorded"
   );
+  setTimeout(() => {
+    window.location.reload();
+  }, 20000);
+
 } catch (error) {
     console.log(error);
   toast.error("Transaction Failed");

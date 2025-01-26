@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import DatabaseService from "@/lib/Database";
 import { IGameState } from "./types";
 import { setData } from "@/lib/localStorage";

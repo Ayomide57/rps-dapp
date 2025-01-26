@@ -111,7 +111,11 @@ export const solve = async (
             },
           });
 
-    winner === "Tie" ? toast.success("It's a Tie, Check your balance for refund") : toast.success(`Winner: ${winner}`);
+    if (winner === "Tie") { 
+      toast.success("It's a Tie, Check your balance for refund") 
+    } else {
+      toast.success(`Winner: ${winner}`);
+    }
   } catch (error) {
     console.log(error);
     toast.error("Transaction Failed");

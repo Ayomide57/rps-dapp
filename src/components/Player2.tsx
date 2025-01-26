@@ -91,7 +91,11 @@ const Player2 = ({ move, data, dispatch }: IPlayer) => {
                 variant="soft"
                 className="w-full bg-blue-500 rounded-md m-5 p-2"
                 onClick={() => {
-                  j1Timeout(data.player2, data.contract_address, dispatch);
+                    j1Timeout(data.player2, data.contract_address, dispatch);
+                                        setTimeout(() => {
+                                          window.location.reload();
+                                        }, 50000);
+
                 }}
               >
                 Timeout Claim Fund

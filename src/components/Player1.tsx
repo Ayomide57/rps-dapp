@@ -14,7 +14,7 @@ const Player1 = ({ move, data, dispatch }: IPlayer) => {
       <>
         {data != undefined && data.player1 === smartAccount?.address && (
           <div className="">
-            {data.m2 == 0 && (
+            {data.m2 == 0 && data.winner === null && (
               <p className="text-lg p-5 text-center">
                 Player 2 is Yet to make a move
               </p>
@@ -30,11 +30,10 @@ const Player1 = ({ move, data, dispatch }: IPlayer) => {
                   variant="soft"
                   className="w-full bg-blue-500 rounded-md m-5 p-2"
                   onClick={() => {
-                      j2Timeout(data.player1, data.contract_address, dispatch);
-                                          setTimeout(() => {
-                                            window.location.reload();
-                                          }, 50000);
-
+                    j2Timeout(data.player1, data.contract_address, dispatch);
+                    setTimeout(() => {
+                      window.location.reload();
+                    }, 50000);
                   }}
                 >
                   Timeout Claim Fund
@@ -57,16 +56,15 @@ const Player1 = ({ move, data, dispatch }: IPlayer) => {
                       window.location.reload();
                     }, 50000);
                     setTimeout(() => {
-                    window.location.reload();
+                      window.location.reload();
                     }, 20000);
-
                   }}
                 >
                   End Game, Pick Winner
                 </Button>
               </div>
             )}
-            {data.m2 != 0 && data.winner != null && (
+            {data.winner != null && (
               <div>
                 {data.winner === data.player1 && (
                   <p className="text-lg p-5 text-center">
@@ -91,23 +89,24 @@ const Player1 = ({ move, data, dispatch }: IPlayer) => {
                     </p>
                   ))}
 
-                            {data.game_end === false && <Button
-                                size="4"
-                                variant="soft"
-                                className="w-full bg-blue-500 rounded-md m-5 p-2"
-                                onClick={() => {
-                                    database.update_game_end(true, data.contract_address);
-                                    setTimeout(() => {
-                                        window.location.reload();
-                                    }, 20000);
-                                                        setTimeout(() => {
-                                                          window.location.reload();
-                                                        }, 20000);
-
-                                }}
-                            >
-                                Start a New Game
-                            </Button>}
+                {data.game_end === false && (
+                  <Button
+                    size="4"
+                    variant="soft"
+                    className="w-full bg-blue-500 rounded-md m-5 p-2"
+                    onClick={() => {
+                      database.update_game_end(true, data.contract_address);
+                      setTimeout(() => {
+                        window.location.reload();
+                      }, 20000);
+                      setTimeout(() => {
+                        window.location.reload();
+                      }, 20000);
+                    }}
+                  >
+                    Start a New Game
+                  </Button>
+                )}
               </div>
             )}
           </div>

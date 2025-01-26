@@ -1,6 +1,6 @@
 
 import { rpsAbi, hasherAbi, hasherAddress, rpsContractByteCode } from "./constants";
-import {  BrowserProvider, Contract, ContractFactory, JsonRpcProvider, parseEther } from "ethers";
+import {  BrowserProvider, Contract, ContractFactory, parseEther } from "ethers";
 import { IGameState } from "./types";
 import { getRandomInt } from "@/lib/utils";
 import { ActionDispatch } from "react";
@@ -257,7 +257,6 @@ export const winner = async (
   const gameRecord = getData("gameRecord");
   const provider = new BrowserProvider(window.ethereum);
   const signer = await provider.getSigner();
-  const signerAddress = await signer.getAddress();
   try {
     const contract = new Contract(contract_address, rpsAbi, signer);
     const response = await contract.win(2, gameRecord.m2);

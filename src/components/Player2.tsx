@@ -61,11 +61,14 @@ const Player2 = ({ move, data, dispatch }: IPlayer) => {
                 )}
 
                 <br />
-                <p className="text-lg p-5 text-center">
-                  {`Please check Your account For Your ${
-                    data.winner === data.player2 ? "Price" : ""
-                  } ${data.winner === "Tie" ? "Refund" : ""}`}
-                </p>
+                {data.winner === data.player2 ||
+                  (data.winner === "Tie" && (
+                    <p className="text-lg p-5 text-center">
+                      {`Please check Your account For Your ${
+                        data.winner === data.player2 ? "Price" : ""
+                      } ${data.winner === "Tie" ? "Refund" : ""}`}
+                    </p>
+                  ))}
                 <Button
                   size="4"
                   variant="soft"

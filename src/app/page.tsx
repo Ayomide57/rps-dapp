@@ -32,7 +32,7 @@ export default function Home() {
       getGameInfo();
       updateData(getData("gameRecord"));
     }
-    console.log(data);
+    console.log("data",data);
   }, [move, data, game, smartAccount?.address, getGameInfo]);
     
   return (

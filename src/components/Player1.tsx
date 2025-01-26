@@ -74,24 +74,28 @@ const Player1 = ({ move, data, dispatch }: IPlayer) => {
                 )}
 
                 <br />
-                <p className="text-lg p-5 text-center">
-                  {`Please check Your account For Your ${
-                    data.winner === data.player1 ? "Price" : ""
-                  } ${data.winner === "Tie" ? "Refund" : ""}`}
-                </p>
-                <Button
-                  size="4"
-                  variant="soft"
-                  className="w-full bg-blue-500 rounded-md m-5 p-2"
-                  onClick={() => {
-                    database.update_game_end(true, data.contract_address);
-                    setTimeout(() => {
-                      window.location.reload();
-                    }, 20000);
-                  }}
-                >
-                  Start a New Game
-                </Button>
+                {data.winner === data.player2 ||
+                  (data.winner === "Tie" && (
+                    <p className="text-lg p-5 text-center">
+                      {`Please check Your account For Your ${
+                        data.winner === data.player1 ? "Price" : ""
+                      } ${data.winner === "Tie" ? "Refund" : ""}`}
+                    </p>
+                  ))}
+
+                            {data.game_end === false && <Button
+                                size="4"
+                                variant="soft"
+                                className="w-full bg-blue-500 rounded-md m-5 p-2"
+                                onClick={() => {
+                                    database.update_game_end(true, data.contract_address);
+                                    setTimeout(() => {
+                                        window.location.reload();
+                                    }, 20000);
+                                }}
+                            >
+                                Start a New Game
+                            </Button>}
               </div>
             )}
           </div>

@@ -62,6 +62,7 @@ export default class DatabaseService {
             const { data, error } = await supabase
             .from('game_record')
                 .select('m2, player1, player2, contract_address, amount, winner, game_end')
+                  .limit(1)
                 .eq('contract_address', contract_address);
             if (error) console.log("fail", error);
             return data;

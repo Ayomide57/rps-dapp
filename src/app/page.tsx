@@ -2,12 +2,11 @@
 import { client } from "@/lib/utils";
 import Image from "next/image";
 import { ConnectButton, useActiveAccount } from "thirdweb/react";
-import { Button } from "@radix-ui/themes";
 import { useEffect, useState, useReducer, useCallback} from "react";
 import { initialState, reducer } from "@/util/reducers";
 import Move from "@/components/Move";
 import StartGame from "@/components/StartGame";
-import { j1Timeout, j2Timeout, playGame, solve, startGame } from "@/util";
+import { startGame } from "@/util";
 import { getData } from "@/lib/localStorage";
 import Player1 from "@/components/Player1";
 import Player2 from "@/components/Player2";

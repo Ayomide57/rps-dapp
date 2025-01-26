@@ -1,12 +1,15 @@
-import { useState, useEffect, ActionDispatch } from "react";
-import { IGameState, IMove } from "@/util/types";
+import {  ActionDispatch } from "react";
 import { Formik } from "formik";
 import { Input } from "./input";
 import { Button } from "@radix-ui/themes";
 import { ActionType } from "@/util/reducers";
 
 export interface IStartGame {
-  playGame: (values: any, dispatch: any, move: number) => void;
+  playGame: (
+    values: any,
+    dispatch: ActionDispatch<[action: ActionType]>,
+    move: number
+  ) => void;
   dispatch: ActionDispatch<[action: ActionType]>;
   move: number;
 }

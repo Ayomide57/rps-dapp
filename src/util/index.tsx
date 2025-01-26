@@ -1,12 +1,11 @@
 
 import { rpsAbi, hasherAbi, hasherAddress, rpsContractByteCode } from "./constants";
-import { BigNumberish, BrowserProvider, Contract, ContractFactory, JsonRpcProvider, parseEther } from "ethers";
+import {  BrowserProvider, Contract, ContractFactory, JsonRpcProvider, parseEther } from "ethers";
 import { IGameState } from "./types";
 import { getRandomInt } from "@/lib/utils";
 import { ActionDispatch } from "react";
 import { ActionType } from "./reducers";
 
-//import { BigNumberish } from "ethers";
 import toast from "react-hot-toast";
 import { getData, setData } from "@/lib/localStorage";
 
@@ -40,7 +39,7 @@ export const playGame = async (
       const response = await contract.play(move, {
         value: parseEther(`${amount}`),
       });
-    const rpsTx = await response;
+     await response;
       dispatch({
         type: "UPDATE_GAME_MOVE",
         payload: {
@@ -92,7 +91,7 @@ export const solve = async (
   try {
       const contract = new Contract(contract_address, rpsAbi, signer);
       const response = await contract.solve(move, salt);
-    const rpsTx = await response;
+    await response;
       const gameRecord = getData("gameRecord");
         const checkWinner1 = await contract.win(move, gameRecord.m2);
         const winnerTx = await checkWinner1;
@@ -112,7 +111,7 @@ export const solve = async (
             },
           });
 
-    winner == "Tie" ? toast.success("It's a Tie, Check your balance for refund") : toast.success(`Winner: ${winner}`);
+    winner === "Tie" ? toast.success("It's a Tie, Check your balance for refund") : toast.success(`Winner: ${winner}`);
   } catch (error) {
     console.log(error);
     toast.error("Transaction Failed");
@@ -237,7 +236,7 @@ export const j2Timeout = async (
   try {
     const contract = new Contract(contract_address, rpsAbi, signer);
     const response = await contract.j2Timeout();
-    const rpsTx = await response;
+    await response;
     dispatch({
       type: "UPDATE_GAME_WINNER",
       payload: {
@@ -269,22 +268,5 @@ export const winner = async (
     toast.error(error);
   }
 };
-
-
-const url = "https://11155111.rpc.thirdweb.com/";
-export const providerLink = new JsonRpcProvider(url);
-
-/**export const registrarContract = new ethers.Contract(
-  registrarAddress,
-  rpsAbi,
-  providerLink
-);
-
-export const pmpTokenContract = new ethers.Contract(
-  pmpTokenSepoliaAddress,
-  hasherAbi,
-  providerLink
-);**/
-
 
 

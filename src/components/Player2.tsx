@@ -57,7 +57,7 @@ const Player2 = ({ move, data, dispatch }: IPlayer) => {
                 )}
 
                 {data.winner === "Tie" && (
-                  <p className="text-lg p-5 text-center">It's a Tie</p>
+                  <p className="text-lg p-5 text-center">It is a Tie</p>
                 )}
 
                 <br />

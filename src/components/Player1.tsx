@@ -1,4 +1,4 @@
-import { j2Timeout, solve, winner } from "@/util";
+import { j2Timeout, solve } from "@/util";
 import { database } from "@/util/reducers";
 import { IPlayer } from "@/util/types";
 import { Button } from "@radix-ui/themes";
@@ -70,7 +70,7 @@ const Player1 = ({ move, data, dispatch }: IPlayer) => {
                 )}
 
                 {data.winner === "Tie" && (
-                  <p className="text-lg p-5 text-center">It's a Tie</p>
+                  <p className="text-lg p-5 text-center">It is a Tie</p>
                 )}
 
                 <br />
